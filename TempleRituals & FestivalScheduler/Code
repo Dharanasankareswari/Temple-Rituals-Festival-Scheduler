@@ -1,0 +1,114 @@
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+// Class to represent a Ritual
+class Ritual {
+private String name;
+private String description;
+private Date date;
+public Ritual(String name, String description, Date date) {
+this.name = name;
+this.description = description;
+this.date = date;
+}
+public String getName() {
+return name;
+}
+public String getDescription() {
+return description;
+}
+public Date getDate() {
+return date;
+}
+@Override
+public String toString() {
+return "Ritual{name='" + name + "', description='" + description + "', date=" + date + "}";
+}
+}
+// Class to represent a Festival
+class Festival {
+private String name;
+private String description;
+private Date date;
+public Festival(String name, String description, Date date) {
+this.name = name;
+this.description = description;
+this.date = date;
+}
+public String getName() {
+return name;
+}
+public String getDescription() {
+return description;
+}
+public Date getDate() {
+return date;
+}
+@Override
+public String toString() {
+return "Festival{name='" + name + "', description='" + description + "', date=" + date + "}";
+
+}
+}
+// Class to represent the Temple
+class Temple {
+private List<Ritual> rituals;
+private List<Festival> festivals;
+public Temple() {
+rituals = new ArrayList<>();
+festivals = new ArrayList<>();
+}
+public void addRitual(Ritual ritual) {
+rituals.add(ritual);
+}
+public void addFestival(Festival festival) {
+festivals.add(festival);
+}
+// Sorting rituals and festivals by date
+public void printSchedule() {
+rituals.sort((r1, r2) -> r1.getDate().compareTo(r2.getDate()));
+festivals.sort((f1, f2) -> f1.getDate().compareTo(f2.getDate()));
+System.out.println("Rituals Schedule:");
+for (Ritual ritual : rituals) {
+System.out.println(ritual);
+}
+
+System.out.println("\nFestivals Schedule:");
+for (Festival festival : festivals) {
+System.out.println(festival);
+}
+}
+}
+// Main Scheduler class to execute the program
+public class Main {
+public static void main(String[] args) throws Exception {
+// Create a Temple object
+Temple temple = new Temple();
+// Sample date formats
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+// Add more Rituals
+temple.addRitual(new Ritual("Morning Prayer", "A prayer in the start of the day.", 
+sdf.parse("2025-03-01")));
+temple.addRitual(new Ritual("Evening Aarti", "Evening prayers with lighting of lamps.", 
+sdf.parse("2025-03-02")));
+temple.addRitual(new Ritual("Midday Raaghu Puja", "Prayer after midday to bless the day.", 
+sdf.parse("2025-03-05")));
+temple.addRitual(new Ritual("Full Moon Prayer", "A special prayer during the full moon.", 
+sdf.parse("2025-03-07")));
+temple.addRitual(new Ritual("Sunset Chanting", "Chanting at sunset for peace and prosperity.", sdf.parse("2025-03-10")));
+temple.addRitual(new Ritual("Night Meditation", "Meditation at night for calmness.", 
+sdf.parse("2025-03-12")));
+
+// Add more Festivals
+temple.addFestival(new Festival("Diwali", "Festival of Lights", sdf.parse("2025-10-15")));
+temple.addFestival(new Festival("Navaratri", "Nine-night festival honoring the Goddess Durga.", sdf.parse("2025-09-23")));
+temple.addFestival(new Festival("Krishna Jeyanti", "Festival of Celebrating Lord Krishna's birthday", sdf.parse("2025-08-29")));
+temple.addFestival(new Festival("Ganesh Chaturthi", "Celebration of Lord Ganesha's birthday.", sdf.parse("2025-08-21")));
+temple.addFestival(new Festival("Skandha Sasti", "Victory of Lord Murugan over Soorapadman", sdf.parse("2025-10-13")));
+temple.addFestival(new Festival("Thaipusam", "The day where Parvati gave Lord Murugan the divine vel to defeat the demon Soorapadman", sdf.parse("2025-01-28")));
+temple.addFestival(new Festival("Vaikunda Ekadasi", "The festival marks the day when Lord Vishnu opened the gates of Vaikunda ", sdf.parse("2025-01-02")));
+// Print the schedule of rituals and festivals
+temple.printSchedule();
+}
+}
